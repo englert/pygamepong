@@ -160,7 +160,10 @@ def main():
         if not paused and winner is None:
             left.move(int(keys[pygame.K_s]) - int(keys[pygame.K_w]))
             right.move(int(keys[pygame.K_DOWN]) - int(keys[pygame.K_UP]))
+            old_ball_y = ball.y
             ball.update()
+            if ball.y != old_ball_y and "wall" in sounds:
+                sounds["wall"].play()
 
             if ball.rect().colliderect(left.rect) and ball.vx < 0:
                 ball.x = left.rect.right + BALL_RADIUS
